@@ -86,25 +86,34 @@ class VirtualMemorySimulator:
         self.root = root
         self.root.title("Virtual Memory Management Simulator")
         self.root.geometry("1200x900")
-        self.root.configure(bg='#1e1e1e')
+        # Neo-inspired color scheme
+        self.BACKGROUND_COLOR = '#0c1021'  # Dark blue background
+        self.ACCENT_COLOR = '#00ffff'      # Cyan accent
+        self.SECONDARY_COLOR = '#007acc'   # Lighter blue
+        self.TEXT_COLOR = '#ffffff'        # White text
+        self.HIGHLIGHT_COLOR = '#1e90ff'   # Bright blue highlight
+        
+        self.root.configure(bg=self.BACKGROUND_COLOR)
         
         # Configure styles
         style = ttk.Style()
-        style.configure('TFrame', background='#1e1e1e')
-        style.configure('TLabel', background='#1e1e1e', foreground='#00ff00')
-        style.configure('TButton', background='#404040', foreground='#00ff00')
-        style.configure('TRadiobutton', background='#1e1e1e', foreground='#00ff00')
-        style.configure('TEntry', fieldbackground='#404040', foreground='#00ff00')
+        style.configure('TFrame', background=self.BACKGROUND_COLOR)
+        style.configure('TLabel', background=self.BACKGROUND_COLOR, foreground=self.ACCENT_COLOR)
+        style.configure('TButton', background=self.SECONDARY_COLOR, foreground=self.TEXT_COLOR)
+        style.configure('TRadiobutton', background=self.BACKGROUND_COLOR, foreground=self.ACCENT_COLOR)
+        style.configure('TEntry', fieldbackground=self.SECONDARY_COLOR, foreground=self.TEXT_COLOR)
         
         # Configure matplotlib style
         plt.style.use('dark_background')
         plt.rcParams.update({
-            'grid.color': '#404040',
-            'text.color': '#00ff00',
-            'axes.labelcolor': '#00ff00',
-            'axes.edgecolor': '#00ff00',
-            'xtick.color': '#00ff00',
-            'ytick.color': '#00ff00'
+            'figure.facecolor': self.BACKGROUND_COLOR,
+            'axes.facecolor': self.BACKGROUND_COLOR,
+            'grid.color': self.SECONDARY_COLOR,
+            'text.color': self.ACCENT_COLOR,
+            'axes.labelcolor': self.ACCENT_COLOR,
+            'axes.edgecolor': self.ACCENT_COLOR,
+            'xtick.color': self.ACCENT_COLOR,
+            'ytick.color': self.ACCENT_COLOR
         })
         
         # Create main frames
@@ -126,7 +135,12 @@ class VirtualMemorySimulator:
         title_label = ttk.Label(control_inner_frame, 
                                text="VIRTUAL MEMORY SIMULATOR v1.0",
                                font=('Courier', 16, 'bold'),
-                               foreground='#00ff00')
+                               foreground=self.ACCENT_COLOR)
+        subtitle_label = ttk.Label(control_inner_frame,
+                                  text="[ MATRIX SYSTEMS INITIALIZED ]",
+                                  font=('Courier', 10),
+                                  foreground=self.SECONDARY_COLOR)
+        subtitle_label.pack(pady=(0, 10))
         title_label.pack(pady=(0, 20))
         # Frames input
         ttk.Label(self.control_frame, text="Number of Frames:").pack(side=tk.LEFT, padx=5)
@@ -154,9 +168,10 @@ class VirtualMemorySimulator:
         
         # Results text with tech styling
         self.results_text = tk.Text(self.viz_frame, height=6, width=70,
-                                  bg='#404040', fg='#00ff00',
+                                  bg=self.SECONDARY_COLOR, fg=self.TEXT_COLOR,
                                   font=('Courier', 10),
-                                  relief=tk.RIDGE)
+                                  relief=tk.RIDGE,
+                                  insertbackground=self.ACCENT_COLOR)
         self.results_text.pack(fill=tk.X, padx=20, pady=10)
         
         # Add a border effect
@@ -168,7 +183,7 @@ class VirtualMemorySimulator:
         status_label = ttk.Label(border_frame, 
                                 textvariable=self.status_var,
                                 font=('Courier', 10),
-                                foreground='#00ff00')
+                                foreground=self.ACCENT_COLOR)
         status_label.pack(side=tk.RIGHT)
         
     def run_simulation(self):
@@ -195,16 +210,17 @@ class VirtualMemorySimulator:
         self.ax1.clear()
         self.ax2.clear()
         
-        # Plot memory state changes
+        # Plot memory state changes with custom colormap
         states = np.array([h['state'] for h in history])
-        im = self.ax1.imshow(states.T, aspect='auto', cmap='YlOrRd')
+        im = self.ax1.imshow(states.T, aspect='auto', cmap='Blues_r')
         self.ax1.set_title('Memory State Over Time')
         self.ax1.set_xlabel('Access Sequence')
         self.ax1.set_ylabel('Frame Number')
         
         # Plot page faults
         faults = [1 if h['fault'] else 0 for h in history]
-        self.ax2.plot(faults, 'r-o', label='Page Fault')
+        self.ax2.plot(faults, '-o', color=self.ACCENT_COLOR, label='Page Fault',
+                     markerfacecolor=self.HIGHLIGHT_COLOR)
         self.ax2.set_title('Page Faults')
         self.ax2.set_xlabel('Access Sequence')
         self.ax2.set_ylabel('Fault (1) / Hit (0)')
