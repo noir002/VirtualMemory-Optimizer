@@ -24,4 +24,4 @@ streamlit run app.py
 - Use the sidebar to configure memory parameters
 - Experiment with different page replacement algorithms
 - Visualize memory allocation and fragmentation in real-time
-- Analyze page fault statistics
+- Analyze page fault statistics..
