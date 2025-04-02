@@ -11,14 +11,14 @@ This tool provides an interactive visualization of virtual memory management con
 
 ## Setup
 1. Install the required dependencies:
-```bash
+bash
 pip install -r requirements.txt
-```
+
 
 2. Run the application:
-```bash
+bash
 streamlit run app.py
-```
+
 
 ## Usage
 - Use the sidebar to configure memory parameters
