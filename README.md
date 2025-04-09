@@ -3,11 +3,11 @@
 This tool provides an interactive visualization of virtual memory management concepts including paging, segmentation, and page replacement algorithms.
 
 ## Features
-- Visualize page tables and memory allocation
-- Simulate page faults and demand paging
-- Experiment with different page replacement algorithms (LRU, Optimal)
-- Memory fragmentation visualization
-- Interactive memory allocation simulation
+- Visualize page tables and memory allocation.
+- Simulate page faults and demand paging.
+- Experiment with different page replacement algorithms (LRU, Optimal).
+- Memory fragmentation visualization.
+- Interactive memory allocation simulation.
 
 ## Setup
 1. Install the required dependencies:
