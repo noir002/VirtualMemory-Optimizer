@@ -18,8 +18,8 @@ This project provides:
 
 1. Clone the repository:
 ```
-git clone https://github.com/yourusername/VirtualMemoryOptimization.git
-cd VirtualMemoryOptimization
+git clone https://github.com/noir002/VirtualMemory-Optimizer.git
+cd VirtualMemoryOptimizer
 ```
 
 2. Install dependencies:
@@ -29,13 +29,24 @@ pip install -r requirements.txt
 
 ## Running the Application
 
-### Option 1: Main Application (with Matplotlib visualization)
+
+### Main: Complete Web App (with Chart and system process visualization)
+
+```
+streamlit run web_app.py
+```
+
+This version includes inte
+ractive graphs and visualizations using Matplotlib.
+
+### Option 1: Main Application on Device (with Matplotlib visualization)
 
 ```
 python app.py
 ```
 
-This version includes interactive graphs and visualizations using Matplotlib.
+This version includes inte
+ractive graphs and visualizations using Matplotlib.
 
 ### Option 2: Simple Application (without Matplotlib)
 
